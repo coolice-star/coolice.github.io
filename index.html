@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Waveform - 音乐播放器</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="picture/image.png" alt="Waveform" class="logo">
+            <span class="brand-name">凉冰同学的音乐空间</span>
+        </div>
+        <div class="nav-center">
+            <button class="nav-btn active">发现</button>
+            <button class="nav-btn">我的歌单</button>
+            <button class="nav-btn">播客</button>
+        </div>
+        <div class="nav-right">
+            <button class="icon-btn"><span class="material-icons">search</span></button>
+            <div class="user-avatar">
+                <a href="https://coolice-star.github.io/" target="_blank">
+                    <img src="picture/00016-1959892083.png" alt="凉冰同学的主页">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="album-cover">
+            <img src="picture/00002-3.jpg" alt="专辑封面" class="rotating">
+        </div>
+        <canvas id="visualizer" width="800" height="200"></canvas>
+        <div class="lyrics-panel">
+            <div class="lyrics-content">
+                <!-- 歌词将通过JavaScript动态添加 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 播放控制栏 -->
+    <footer class="player-controls">
+        <div class="progress-bar">
+            <div class="progress"></div>
+            <div class="progress-handle"></div>
+            <div class="time-info">
+                <span class="current-time">0:00</span>
+                <span class="total-time">3:45</span>
+            </div>
+        </div>
+        <div class="control-buttons">
+            <button class="icon-btn"><span class="material-icons">shuffle</span></button>
+            <button class="icon-btn"><span class="material-icons">skip_previous</span></button>
+            <button class="play-btn"><span class="material-icons">play_circle</span></button>
+            <button class="icon-btn"><span class="material-icons">skip_next</span></button>
+            <button class="icon-btn"><span class="material-icons">repeat</span></button>
+        </div>
+        <div class="extra-controls">
+            <button class="icon-btn"><span class="material-icons">favorite_border</span></button>
+            <button class="icon-btn"><span class="material-icons">queue_music</span></button>
+            <button class="icon-btn"><span class="material-icons">volume_up</span></button>
+        </div>
+    </footer>
+
+    <script>
+        class MusicPlayer {
+            constructor() {
+                this.audio = new Audio();
+                this.isPlaying = false;
+                this.currentTrack = null;
+                this.audioContext = null;
+                this.analyser = null;
+                this.isVisualizerSetup = false;
+                this.audioSource = null;
+                
+                // 获取DOM元素
+                this.playBtn = document.querySelector('.play-btn');
+                this.progressBar = document.querySelector('.progress-bar');
+                this.progress = document.querySelector('.progress');
+                this.currentTimeSpan = document.querySelector('.current-time');
+                this.totalTimeSpan = document.querySelector('.total-time');
+                this.prevBtn = document.querySelector('.icon-btn:nth-child(2)');
+                this.nextBtn = document.querySelector('.icon-btn:nth-child(4)');
+                this.albumCover = document.querySelector('.album-cover img');
+                
+                // 播放列表
+                this.playlist = [
+                    {
+                        title: 'A Little Story',
+                        artist: 'Valentin',
+                        url: 'music\和熙的糖果风-北昼-403395903-128.mp3',
+                        cover: 'picture/00006-926343550.png'
+                    }
+                ];
+                
+                this.currentIndex = 0;
+                this.loadTrack(0);
+                this.initializeEvents();
+            }
+            
+            // ... [这里是所有其他方法，保持不变]
+        }
+        
+        // 初始化播放器
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = new MusicPlayer();
+        });
+    </script>
+</body>
+</html> 
